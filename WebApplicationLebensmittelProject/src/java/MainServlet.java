@@ -45,10 +45,13 @@ public class MainServlet extends HttpServlet {
             out.println("<title>Servlet MainServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            
-            
-            out.println(dbHelper.getTableOfRezept());
-            
+                                    
+            out.println(dbHelper.getTable("REZEPT"));
+            out.println(dbHelper.getTable("EINHEIT"));
+            out.println(dbHelper.getTable("LAGERART"));
+            out.println(dbHelper.getTable("LEBENSMITTEL"));
+            out.println(dbHelper.getTable("LEBENSMITTELLAGER"));
+            out.println(dbHelper.getTable("REZEPTINHALT"));
             
               
             //out.println("<h1>Servlet MainServlet at " + request.getContextPath() + "</h1>");
