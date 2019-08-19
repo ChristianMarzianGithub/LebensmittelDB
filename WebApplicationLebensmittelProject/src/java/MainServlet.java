@@ -53,6 +53,10 @@ public class MainServlet extends HttpServlet {
             out.println(dbHelper.getTable("LEBENSMITTELLAGER"));
             out.println(dbHelper.getTable("REZEPTINHALT"));
             
+            
+            
+            
+            
               
             //out.println("<h1>Servlet MainServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
