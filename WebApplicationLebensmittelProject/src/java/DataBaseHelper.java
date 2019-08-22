@@ -22,18 +22,15 @@ public class DataBaseHelper {
                 
                 conn = DriverManager.getConnection(url,"testUser","roller1@sql");
                 
+                
+                
+                
+                
 
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(MainServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InstantiationException ex) {
-                Logger.getLogger(MainServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(MainServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+                
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
                 Logger.getLogger(MainServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-        
-        
         return conn;
     }
     
@@ -62,17 +59,15 @@ public class DataBaseHelper {
             while(rs.next()){   
                 retVal = retVal + "<tr>";
                 for(int i = 1; i <= numberOfColumns; i++){                    
-                    retVal = retVal + "<td>";
-                    retVal = retVal + "<div id='" + rs.getString(i)  + "&_" + tableName + "'>";                    
-                    retVal = retVal + rs.getString(i); 
-                    retVal = retVal + "</div>";
+                    retVal = retVal + "<td>";                    
+                    retVal = retVal + rs.getString(i);                     
                     retVal = retVal + "</td>";
                 }
                 retVal = retVal + "</tr>";          
             }        
                retVal = retVal + "</table>";    
                
-               retVal = retVal + "<button onclick='myFunction(" + rs.getString(1)  + "&_" + tableName + ")'>Click me</button>";
+              
                
                retVal = retVal + "<hr>";    
                
@@ -86,12 +81,7 @@ public class DataBaseHelper {
             Logger.getLogger(DataBaseHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        retVal = retVal  +   "<script>\n" +
-                                    "	function myFunction(id)\n" +
-                                    "	{\n" +
-                                    "		document.getElementById(id).innerHTML = \"My First JavaScript\";\n" +
-                                    "	}	\n" +
-                                    "</script>";
+       
         return retVal;
     }
 }
