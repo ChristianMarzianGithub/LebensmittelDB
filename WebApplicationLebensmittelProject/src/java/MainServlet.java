@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -18,9 +17,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 /**
  *
@@ -42,41 +38,17 @@ public class MainServlet extends HttpServlet {
     public String processTableRequest(String tableName) throws SQLException, IOException, ParseException{
         String retVal = "";
         
-        
-        
         DataBaseHelper y = new DataBaseHelper();
         Connection conn = y.connect();
         Statement sqlStatementTableContent = conn.createStatement();
         
-        
         ResultSet rsTableContent;
         rsTableContent = sqlStatementTableContent.executeQuery("SELECT * FROM " + tableName);
         
-        JSONArray jsonAr = new JSONArray();
-        ResultSetMetaData  rsmd = rsTableContent.getMetaData();
-        int columnCount = rsmd.getColumnCount();
-        
-        if (columnCount > 0){
-            while(rsTableContent.next()){
-                JSONObject obj = new JSONObject();
-                for(int i = 1; i <= columnCount; i++){
-                    String columnName = rsmd.getColumnName(i);
-                    obj.put(columnName, rsTableContent.getObject(i));
-                }
-               jsonAr.add(obj);          
-            }
-        }
-        
-                   
-                
-        
-                
-                
-                
         
         
         //Ausgabe des JSON-Strings
-        retVal += jsonAr.toJSONString();     
+        retVal += JsonHelper.ResultSetToJsonString(rsTableContent);
         
         return retVal;
     }
